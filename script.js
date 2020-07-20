@@ -30,7 +30,7 @@ function captureNetworkRequest(e) {
                 m3u8 = []
             }
 
-            m3u8.push(url);
+            m3u8.push(`youtube-dl -f best ${url} -o ${window.location.href.split('/')[7].split(',')[1].split('.')[0]}`);
 
             localStorage.setItem('m3u8', JSON.stringify(m3u8))
 
@@ -50,7 +50,7 @@ function captureNetworkRequest(e) {
             m3u8_failed = []
         }
 
-        m3u8_failed.push(window.location.href);
+        m3u8_failed.push(window.location.href)
 
         localStorage.setItem('m3u8_failed', JSON.stringify(m3u8_failed))
     }
@@ -58,4 +58,9 @@ function captureNetworkRequest(e) {
 
 setTimeout(function(){
     captureNetworkRequest()
+
+    setTimeout(function(){
+        document.getElementsByClassName('passador-video next-video')[0].click();
+    },500);
+
 },2000);
